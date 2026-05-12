@@ -1,16 +1,22 @@
-import { Carousel } from "@/components/cells"
-import { ProductCard } from "../ProductCard/ProductCard"
 import { listProducts } from "@/lib/data/products"
+import { mapProductToCarouselRow } from "@/lib/helpers/map-products-for-carousel"
+import { ProductCarousel } from "@/components/ui/product-carousel"
 import { Product } from "@/types/product"
+import type { HttpTypes } from "@medusajs/types"
+import { ensureAtLeastOneProduct } from "@/lib/data/demo-product"
 
 export const HomeProductsCarousel = async ({
   locale,
   sellerProducts,
   home,
+  title,
+  viewAllHref = "/products",
 }: {
   locale: string
   sellerProducts: Product[]
   home: boolean
+  title: string
+  viewAllHref?: string
 }) => {
   const {
     response: { products },
@@ -26,20 +32,21 @@ export const HomeProductsCarousel = async ({
     forceCache: !home,
   })
 
-  if (!products.length && !sellerProducts.length) return null
+  const source: (HttpTypes.StoreProduct | Product)[] = sellerProducts.length
+    ? sellerProducts
+    : products
+
+  const carouselProducts = ensureAtLeastOneProduct(
+    source.map(mapProductToCarouselRow)
+  )
 
   return (
     <div className="flex justify-center w-full">
-      <Carousel
-        align="start"
-        items={(sellerProducts.length ? sellerProducts : products).map(
-          (product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-            />
-          )
-        )}
+      <ProductCarousel
+        title={title}
+        products={carouselProducts}
+        viewAllHref={viewAllHref}
+        className="py-0"
       />
     </div>
   )

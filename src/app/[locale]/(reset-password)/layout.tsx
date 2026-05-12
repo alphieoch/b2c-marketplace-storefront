@@ -1,6 +1,5 @@
 import { Footer, Header } from "@/components/organisms"
 import { checkRegion } from "@/lib/helpers/check-region"
-import { redirect } from "next/navigation"
 
 export default async function ResetPasswordLayout({
   children,
@@ -11,10 +10,8 @@ export default async function ResetPasswordLayout({
 }>) {
   const { locale } = await params
   const regionCheck = await checkRegion(locale)
-
-  if (!regionCheck) {
-    return redirect("/")
-  }
+  // Fail open when regions are unavailable to avoid redirect loops.
+  void regionCheck
 
   return (
     <>

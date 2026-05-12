@@ -1,0 +1,25 @@
+$ next lint
+`next lint` is deprecated and will be removed in Next.js 16.
+For new projects, use create-next-app to choose your preferred linter.
+For existing projects, migrate to the ESLint CLI:
+npx @next/codemod@canary next-lint-to-eslint-cli .
+
+
+./src/app/layout.tsx
+59:9  Warning: `rel="preconnect"` is missing from Google Font. See: https://nextjs.org/docs/messages/google-font-preconnect  @next/next/google-font-preconnect
+
+./src/components/cells/CartDropdown/CartDropdown.tsx
+68:6  Warning: React Hook useEffect has a missing dependency: 'pathname'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./src/components/cells/PasswordValidator/PasswordValidator.tsx
+60:6  Warning: React Hook useEffect has a missing dependency: 'setError'. Either include it or remove the dependency array. If 'setError' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+
+./src/components/organisms/ShippingAddress/ShippingAddress.tsx
+44:5  Warning: React Hook useMemo has a missing dependency: 'locale'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+54:5  Warning: React Hook useMemo has a missing dependency: 'cart?.shipping_address'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+102:6  Warning: React Hook useEffect has missing dependencies: 'cart', 'customer.email', and 'setFormAddress'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./src/components/sections/CartAddressSection/CartAddressSection.tsx
+50:6  Warning: React Hook useEffect has missing dependencies: 'pathname' and 'router'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules

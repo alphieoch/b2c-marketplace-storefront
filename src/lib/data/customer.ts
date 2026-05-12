@@ -61,12 +61,18 @@ export const updateCustomer = async (body: HttpTypes.StoreUpdateCustomer) => {
 
 export async function signup(formData: FormData) {
   const password = formData.get('password') as string;
-  const customerForm = {
+  const customerForm: any = {
     email: formData.get('email') as string,
     first_name: formData.get('first_name') as string,
     last_name: formData.get('last_name') as string,
     phone: formData.get('phone') as string
   };
+
+  const company_name = formData.get('company_name') as string;
+  if (company_name) {
+    customerForm.company_name = company_name;
+    customerForm.metadata = { customer_type: 'business' };
+  }
 
   try {
     const token = await sdk.auth.register('customer', 'emailpass', {

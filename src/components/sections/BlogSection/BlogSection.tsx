@@ -4,29 +4,29 @@ import { BlogCard } from '@/components/organisms';
 export const blogPosts: BlogPost[] = [
   {
     id: 1,
-    title: "Summer's Most Elegant Accessories",
+    title: "What's in Season: Spring Produce Guide",
     excerpt:
-      "Discover this season's most sophisticated accessories that blend timeless elegance with modern design.",
+      "Discover the freshest spring vegetables and fruits hitting our marketplace this month from local organic farms.",
     image: '/images/blog/post-1.jpg',
-    category: 'ACCESSORIES',
+    category: 'SEASONAL',
     href: '#',
   },
   {
     id: 2,
-    title: 'The Season’s Hottest Trends',
+    title: 'Meet the Farmers: Heritage Meat Co.',
     excerpt:
-      'From bold colors to nostalgic silhouettes, explore the must-have looks defining this season’s fashion narrative.',
+      'Learn how Heritage Meat Co. raises ethically bred Berkshire hogs and grass-fed cattle on open pastures.',
     image: '/images/blog/post-2.jpg',
-    category: 'STYLE GUIDE',
+    category: 'FARM STORIES',
     href: '#',
   },
   {
     id: 3,
-    title: 'Minimalist Outerwear Trends',
+    title: 'Raw Milk: Benefits & Safety',
     excerpt:
-      'Explore the latest minimalist outerwear pieces that combine functionality with clean aesthetics.',
+      'Everything you need to know about raw dairy, from nutritional benefits to safe handling practices at home.',
     image: '/images/blog/post-3.jpg',
-    category: 'TRENDS',
+    category: 'GUIDES',
     href: '#',
   },
 ];

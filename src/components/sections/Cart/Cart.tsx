@@ -4,6 +4,7 @@ import { Button } from '@/components/atoms';
 import LocalizedClientLink from '@/components/molecules/LocalizedLink/LocalizedLink';
 import { CartEmpty, CartItems, CartSummary } from '@/components/organisms';
 import { useCartContext } from '@/components/providers';
+import posthog from 'posthog-js';
 
 export const Cart = () => {
   const { cart } = useCartContext();
@@ -29,7 +30,16 @@ export const Cart = () => {
             discount_total={cart?.discount_subtotal || 0}
           />
           <LocalizedClientLink href="/checkout?step=address">
-            <Button className="flex w-full items-center justify-center py-3">Go to checkout</Button>
+            <Button
+              className="flex w-full items-center justify-center py-3"
+              onClick={() => posthog.capture('checkout_started', {
+                cart_total: cart?.total || 0,
+                currency: cart?.currency_code || '',
+                item_count: cart?.items?.length || 0,
+              })}
+            >
+              Go to checkout
+            </Button>
           </LocalizedClientLink>
         </div>
       </div>

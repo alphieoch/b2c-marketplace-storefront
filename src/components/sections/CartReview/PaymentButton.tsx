@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react"
 import { Button } from "@/components/atoms"
 import { orderErrorFormatter } from "@/lib/helpers/order-error-formatter"
 import { toast } from "@/lib/helpers/toast"
+import posthog from "posthog-js"
 
 type PaymentButtonProps = {
   cart: HttpTypes.StoreCart
@@ -68,12 +69,33 @@ const StripePaymentButton = ({
       const res = await placeOrder()
       if (!res.ok) {
         setErrorMessage(res.error?.message)
+        posthog.capture('payment_error_occurred', {
+          payment_provider: 'stripe',
+          error_message: res.error?.message,
+          cart_total: cart?.total,
+          currency: cart?.currency_code,
+        })
+      } else {
+        posthog.capture('order_placed', {
+          payment_provider: 'stripe',
+          cart_total: cart?.total,
+          currency: cart?.currency_code,
+          item_count: cart?.items?.length,
+        })
       }
     } catch (error: any) {
       if (error?.message !== "NEXT_REDIRECT") {
         setErrorMessage(
           error?.message?.replace("Error setting up the request: ", "")
         )
+        posthog.captureException(error)
+      } else {
+        posthog.capture('order_placed', {
+          payment_provider: 'stripe',
+          cart_total: cart?.total,
+          currency: cart?.currency_code,
+          item_count: cart?.items?.length,
+        })
       }
     } finally {
       setSubmitting(false)
@@ -135,6 +157,13 @@ const StripePaymentButton = ({
           }
 
           setErrorMessage(error.message || null)
+          posthog.capture('payment_error_occurred', {
+            payment_provider: 'stripe',
+            error_code: error.code,
+            error_message: error.message,
+            cart_total: cart?.total,
+            currency: cart?.currency_code,
+          })
           return
         }
 
@@ -176,12 +205,21 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
       const res = await placeOrder()
       if (!res.ok) {
         setErrorMessage(res.error?.message)
+        posthog.capture('payment_error_occurred', {
+          payment_provider: 'manual',
+          error_message: res.error?.message,
+        })
+      } else {
+        posthog.capture('order_placed', { payment_provider: 'manual' })
       }
     } catch (error: any) {
       if (error?.message !== "NEXT_REDIRECT") {
         setErrorMessage(
           error?.message?.replace("Error setting up the request: ", "")
         )
+        posthog.captureException(error)
+      } else {
+        posthog.capture('order_placed', { payment_provider: 'manual' })
       }
     } finally {
       setSubmitting(false)

@@ -2,6 +2,7 @@
 
 import { CartProvider } from "@/components/providers"
 import { Cart } from "@/types/cart"
+import { ThemeProvider } from "next-themes"
 import type React from "react"
 
 import { PropsWithChildren } from "react"
@@ -11,5 +12,9 @@ interface ProvidersProps extends PropsWithChildren {
 }
 
 export function Providers({ children, cart }: ProvidersProps) {
-  return <CartProvider cart={cart}>{children}</CartProvider>
+  return (
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <CartProvider cart={cart}>{children}</CartProvider>
+    </ThemeProvider>
+  )
 }

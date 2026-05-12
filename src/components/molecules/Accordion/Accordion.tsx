@@ -30,12 +30,12 @@ export const Accordion = ({
   }
 
   return (
-    <Card>
+    <div className="border-b py-2">
       <div
         onClick={openHandler}
-        className="flex justify-between items-center cursor-pointer px-2"
+        className="flex justify-between items-center cursor-pointer py-2 px-1"
       >
-        <h4 className="label-lg uppercase">{heading}</h4>
+        <h4 className="label-lg font-bold">{heading}</h4>
         <CollapseIcon
           size={20}
           className={cn("transition-all duration-300", isOpen && "rotate-180")}
@@ -49,10 +49,10 @@ export const Accordion = ({
           transition: "max-height 0.3s ease-in-out, opacity 0.2s ease-in-out",
         }}
       >
-        <div ref={contentRef} className="pt-4">
+        <div ref={contentRef} className="pt-2 pb-4">
           {children}
         </div>
       </div>
-    </Card>
+    </div>
   )
 }

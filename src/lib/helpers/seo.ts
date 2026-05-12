@@ -66,7 +66,7 @@ export const generateCategoryMetadata = async (
       images: [
         {
           url:
-            `${protocol}://${host}/images/categories/${category.handle}.png` ||
+            (category.metadata?.image_url as string | undefined) ||
             `${protocol}://${host}/images/placeholder.svg`,
           width: 1200,
           height: 630,
@@ -80,7 +80,7 @@ export const generateCategoryMetadata = async (
       title: category.name,
       description: `${category.name} Category - ${process.env.NEXT_PUBLIC_SITE_NAME}`,
       images: [
-        `${protocol}://${host}/images/categories/${category.handle}.png` ||
+        (category.metadata?.image_url as string | undefined) ||
           `${protocol}://${host}/images/placeholder.svg`,
       ],
     },

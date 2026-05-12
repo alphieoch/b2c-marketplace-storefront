@@ -2,7 +2,7 @@
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
 import { cn } from "@/lib/utils"
-import { useParams } from "next/navigation"
+import { useParams, usePathname } from "next/navigation"
 import { CollapseIcon } from "@/icons"
 import { useMemo } from "react"
 import {
@@ -25,6 +25,9 @@ export const CategoryNavbar = ({
   onClose,
 }: CategoryNavbarProps) => {
   const { category } = useParams<{ category?: string }>()
+  const pathname = usePathname()
+  const isAllProductsPage = pathname?.endsWith("/categories")
+  const isStoresPage = pathname?.endsWith("/stores")
 
   const {
     hoveredCategoryId,
@@ -92,15 +95,38 @@ export const CategoryNavbar = ({
         aria-label="Category navigation"
         data-testid="category-navbar"
       >
+        {isAllProductsPage && (
+          <span
+            className="label-md uppercase px-2 my-1 md:my-0 flex items-center justify-between md:flex-shrink-0 text-primary"
+            data-testid="category-label-all-products"
+          >
+            All Products
+          </span>
+        )}
+
+        {!isAllProductsPage && (
+          <LocalizedClientLink
+            href="/categories"
+            onClick={handleClose}
+            className={cn(
+              "label-md uppercase px-2 my-1 md:my-0 flex items-center justify-between md:flex-shrink-0 text-primary"
+            )}
+            data-testid="category-link-all-products"
+          >
+            All Products
+          </LocalizedClientLink>
+        )}
+
         <LocalizedClientLink
-          href="/categories"
+          href="/stores"
           onClick={handleClose}
           className={cn(
-            "label-md uppercase px-2 my-1 md:my-0 flex items-center justify-between md:flex-shrink-0 text-primary"
+            "label-md uppercase px-2 my-1 md:my-0 flex items-center justify-between md:flex-shrink-0 text-primary",
+            isStoresPage && "md:border-b md:border-primary"
           )}
-          data-testid="category-link-all-products"
+          data-testid="category-link-stores"
         >
-          All Products
+          Stores
         </LocalizedClientLink>
 
         {filteredCategories.map(({ id, handle, name, category_children }) => {

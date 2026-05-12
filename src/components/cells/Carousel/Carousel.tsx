@@ -56,8 +56,19 @@ export const CustomCarousel = ({
         className="embla__viewport overflow-hidden rounded-xs w-full xl:flex xl:justify-center"
         ref={emblaRef}
       >
-        <div className="embla__container flex">
-          {items.map((slide) => slide)}
+        <div className="embla__container flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform">
+          {items.map((slide, index) => (
+            <div
+              key={index}
+              className={`transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                index === selectedIndex
+                  ? "opacity-100 scale-100"
+                  : "opacity-85 scale-[0.98]"
+              }`}
+            >
+              {slide}
+            </div>
+          ))}
         </div>
 
         <div className="flex justify-between items-center mt-4 sm:hidden">
@@ -69,10 +80,18 @@ export const CustomCarousel = ({
             />
           </div>
           <div>
-            <button onClick={() => changeSlideHandler(selectedIndex - 1)}>
+            <button
+              onClick={() => changeSlideHandler(selectedIndex - 1)}
+              aria-label="Previous slide"
+              title="Previous slide"
+            >
               <ArrowLeftIcon color={arrowColor[variant]} />
             </button>
-            <button onClick={() => changeSlideHandler(selectedIndex + 1)}>
+            <button
+              onClick={() => changeSlideHandler(selectedIndex + 1)}
+              aria-label="Next slide"
+              title="Next slide"
+            >
               <ArrowRightIcon color={arrowColor[variant]} />
             </button>
           </div>

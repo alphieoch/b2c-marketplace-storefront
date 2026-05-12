@@ -11,6 +11,7 @@ import { WishlistButton } from "../WishlistButton/WishlistButton"
 import { Wishlist } from "@/types/wishlist"
 import { toast } from "@/lib/helpers/toast"
 import { useCartContext } from "@/components/providers"
+import posthog from "posthog-js"
 
 const optionsAsKeymap = (
   variantOptions: HttpTypes.StoreProductVariant["options"]
@@ -112,7 +113,16 @@ export const ProductDetailsHeader = ({
         quantity: 1,
         countryCode: locale,
       })
+      posthog.capture('product_added_to_cart', {
+        product_id: product.id,
+        product_title: product.title,
+        variant_id: variantId,
+        price: +(variantPrice?.calculated_price_number || 0),
+        currency: variantPrice?.currency_code || 'eur',
+        seller_id: product.seller?.id,
+      })
     } catch (error) {
+      posthog.captureException(error)
       toast.error({
         title: "Error adding to cart",
         description: "Some variant does not have the required inventory",

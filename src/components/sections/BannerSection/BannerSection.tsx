@@ -9,17 +9,17 @@ export const BannerSection = () => {
         <div className="py-6 px-6 flex flex-col h-full justify-between border border-secondary rounded-sm">
           <div className="mb-8 lg:mb-48">
             <span className="text-sm inline-block px-4 py-1 border border-secondary rounded-sm">
-              #COLLECTION
+              #SEASONAL
             </span>
             <h2 className="display-sm">
-              BOHO VIBES: WHERE COMFORT MEETS CREATIVITY
+              HARVEST COLLECTION: FRESH FROM THE FIELD
             </h2>
             <p className="text-lg text-tertiary max-w-lg">
-              Discover boho styles that inspire adventure and embrace the beauty
-              of the unconventional.
+              Explore our seasonal harvest featuring the freshest produce, 
+              pasture-raised meats, and artisan goods from local farms.
             </p>
           </div>
-          <LocalizedClientLink href="/collections/boho">
+          <LocalizedClientLink href="/categories">
             <Button size="large" className="w-fit bg-secondary/10">
               EXPLORE
             </Button>
@@ -30,7 +30,7 @@ export const BannerSection = () => {
             loading="lazy"
             fetchPriority="high"
             src="/images/banner-section/Image.jpg"
-            alt="Boho fashion collection - Model wearing a floral dress with yellow boots"
+            alt="Fresh farm harvest - seasonal produce and goods"
             width={700}
             height={600}
             className="object-cover object-top rounded-sm"

@@ -20,6 +20,7 @@ import { HomeProductsCarousel } from "./HomeProductsCarousel/HomeProductsCarouse
 import { ProductGallery } from "./ProductGallery/ProductGallery"
 import { ProductDetails } from "./ProductDetails/ProductDetails"
 import { AlgoliaProductSidebar } from "./ProductSidebar/AlgoliaProductSidebar"
+import { SearchProductSidebar } from "./ProductSidebar/SearchProductSidebar"
 import { Addresses } from "./Addressess/Addresses"
 import { ReviewsToWrite } from "./Reviews/ReviewsToWrite"
 import { ReviewsWritten } from "./Reviews/ReviewsWritten"
@@ -48,6 +49,7 @@ export {
   ProductGallery,
   ProductDetails,
   AlgoliaProductSidebar,
+  SearchProductSidebar,
   Addresses,
   ReviewsToWrite,
   ReviewsWritten,

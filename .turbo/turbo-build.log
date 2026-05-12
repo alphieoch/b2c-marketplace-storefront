@@ -1,0 +1,80 @@
+
+[0m[2m[35m$[0m [2m[1mnext build[0m
+   [1m[38;2;173;127;168m▲ Next.js 15.5.9[39m[22m
+   - Environments: .env.local, .env
+
+ [37m[1m [22m[39m Creating an optimized production build ...
+ [32m[1m✓[22m[39m Compiled successfully in 12.5s
+ [37m[1m [22m[39m Skipping validation of types
+[?25l [37m[1m [22m[39m Linting  [36m.[39m[2K[1G [37m[1m [22m[39m Linting  [36m..[39m[2K[1G [37m[1m [22m[39m Linting  [36m...[39m[2K[1G [37m[1m [22m[39m Linting  [36m.[39m[2K[1G [37m[1m [22m[39m Linting  [36m..[39m[2K[1G [37m[1m [22m[39m Linting  [36m...[39m[2K[1G [37m[1m [22m[39m Linting  [36m.[39m[2K[1G [37m[1m [22m[39m Linting  [36m..[39m[2K[1G [37m[1m [22m[39m Linting  [36m...[39m[2K[1G[?25h
+./src/app/layout.tsx
+60:9  Warning: `rel="preconnect"` is missing from Google Font. See: https://nextjs.org/docs/messages/google-font-preconnect  @next/next/google-font-preconnect
+
+./src/components/cells/CartDropdown/CartDropdown.tsx
+68:6  Warning: React Hook useEffect has a missing dependency: 'pathname'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./src/components/cells/PasswordValidator/PasswordValidator.tsx
+60:6  Warning: React Hook useEffect has a missing dependency: 'setError'. Either include it or remove the dependency array. If 'setError' changes too often, find the parent component that defines it and wrap that definition in useCallback.  react-hooks/exhaustive-deps
+
+./src/components/organisms/ShippingAddress/ShippingAddress.tsx
+44:5  Warning: React Hook useMemo has a missing dependency: 'locale'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+54:5  Warning: React Hook useMemo has a missing dependency: 'cart?.shipping_address'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+102:6  Warning: React Hook useEffect has missing dependencies: 'cart', 'customer.email', and 'setFormAddress'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+./src/components/sections/CartAddressSection/CartAddressSection.tsx
+50:6  Warning: React Hook useEffect has missing dependencies: 'pathname' and 'router'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+[?25l [36m.[39m [2K[1G[?25h    [32m[1m✓[22m[39m Linting 
+[?25l [37m[1m [22m[39m Collecting page data  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting page data  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting page data  [36m...[39m[2K[1G[?25h [37m[1m [22m[39m Collecting page data     [32m[1m✓[22m[39m Collecting page data 
+[?25l [37m[1m [22m[39m Generating static pages (0/7)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (0/7)  [36m[=   ][39m[2K[1G [37m[1m [22m[39m Generating static pages (0/7)  [36m[==  ][39m[2K[1G [37m[1m [22m[39m Generating static pages (0/7)  [36m[=== ][39m[2K[1G [37m[1m [22m[39m Generating static pages (0/7)  [36m[ ===][39m[2K[1G[?25h [32m[1m✓[22m[39m Generating static pages (7/7)
+[?25l [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[?25l [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G[?25h [37m[1m [22m[39m Collecting build traces     [32m[1m✓[22m[39m Collecting build traces 
+[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Finalizing page optimization     [32m[1m✓[22m[39m Finalizing page optimization 
+
+[4mRoute (app)[24m                                        [4mSize[24m  [4mFirst Load JS[24m  [4m[24m  [4m[24m
+┌ ƒ /                                             149 B         [37m[1m164 kB[22m[39m
+├ ƒ /_not-found                                   149 B         [37m[1m164 kB[22m[39m
+├ ƒ /[locale]                                     162 B         [37m[1m676 kB[22m[39m
+├ ƒ /[locale]/cart                                163 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/categories                          162 B         [37m[1m676 kB[22m[39m
+├ ƒ /[locale]/categories/[category]               163 B         [37m[1m676 kB[22m[39m
+├ ƒ /[locale]/checkout                          25.2 kB         [37m[1m494 kB[22m[39m
+├ ƒ /[locale]/collections/[handle]                163 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/forgot-password                   1.24 kB         [37m[1m470 kB[22m[39m
+├ ƒ /[locale]/login                               163 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/order/[id]/confirmed                428 B         [37m[1m391 kB[22m[39m
+├ ƒ /[locale]/products/[handle]                   162 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/register                            163 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/reset-password                    2.39 kB         [37m[1m482 kB[22m[39m
+├ ƒ /[locale]/sellers/[handle]                    163 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/sellers/[handle]/reviews            163 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/stores                            2.89 kB         [37m[1m472 kB[22m[39m
+├ ƒ /[locale]/user                                162 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/user/addresses                      162 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/user/messages                       512 B         [37m[1m469 kB[22m[39m
+├ ƒ /[locale]/user/orders                         163 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/user/orders/[id]                  1.72 kB         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/user/orders/[id]/request-success  3.01 kB         [37m[1m193 kB[22m[39m
+├ ƒ /[locale]/user/orders/[id]/return            2.9 kB         [37m[1m472 kB[22m[39m
+├ ƒ /[locale]/user/register                       163 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/user/returns                      2.22 kB         [37m[1m676 kB[22m[39m
+├ ƒ /[locale]/user/reviews                        163 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/user/reviews/written                163 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/user/settings                     1.51 kB         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/user/wishlist                       163 B         [37m[1m675 kB[22m[39m
+├ ƒ /[locale]/workos/callback                     149 B         [37m[1m164 kB[22m[39m
+├ ƒ /api/workos/auth                              149 B         [37m[1m164 kB[22m[39m
+└ ○ /robots.txt                                   149 B         [37m[1m164 kB[22m[39m
++ First Load JS shared by all                    [37m[1m163 kB[22m[39m
+  ├ chunks/3ea884fc-8055a848120993d3.js         54.2 kB
+  ├ chunks/4386-af78de943d784911.js             46.5 kB
+  ├ chunks/50f762f6-38f4c8a9a902f995.js         60.6 kB
+  └ other shared chunks (total)                 2.24 kB
+
+
+ƒ Middleware                                    [37m[1m35.9 kB[22m[39m
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+[?25h

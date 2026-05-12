@@ -11,10 +11,12 @@ export const HeaderCategoryNavbar = ({
   parentCategories,
   categories,
   onClose,
+  layout = "horizontal",
 }: {
   parentCategories: HttpTypes.StoreProductCategory[]
   categories: HttpTypes.StoreProductCategory[]
   onClose?: (state: boolean) => void
+  layout?: "horizontal" | "vertical"
 }) => {
   const { category } = useParams<{ category?: string }>()
 
@@ -23,9 +25,16 @@ export const HeaderCategoryNavbar = ({
     [category, categories, parentCategories]
   )
 
+  const isVertical = layout === "vertical"
+
   return (
     <nav
-      className="flex items-center p-4 gap-2 overflow-x-auto scrollbar-hide"
+      className={cn(
+        "flex scrollbar-hide",
+        isVertical
+          ? "flex-col gap-1 p-4"
+          : "items-center p-4 gap-2 overflow-x-auto"
+      )}
       aria-label="Parent categories"
     >
       {parentCategories?.map(({ id, handle, name }) => {
@@ -36,8 +45,14 @@ export const HeaderCategoryNavbar = ({
             href={`/categories/${handle}`}
             onClick={() => (onClose ? onClose(false) : null)}
             className={cn(
-              "label-large uppercase text-primary hover:opacity-80 transition-opacity py-2 font-semibold px-8",
-              isActive && "border-b border-primary"
+              "uppercase text-primary transition-colors",
+              isVertical
+                ? "label-md px-4 py-3 hover:bg-secondary/10 whitespace-normal flex-shrink-0"
+                : "label-large hover:opacity-80 transition-opacity py-2 font-semibold whitespace-nowrap flex-shrink-0 px-4 lg:px-8",
+              isActive && (isVertical
+                ? "border-l-2 border-primary bg-secondary/5"
+                : "border-b border-primary"
+              )
             )}
           >
             {name}

@@ -1,6 +1,6 @@
 import { Footer, Header } from "@/components/organisms"
+import { VendorBusinessCTA } from "@/components/cells/VendorBusinessCTA"
 import { checkRegion } from "@/lib/helpers/check-region"
-import { redirect } from "next/navigation"
 
 export default async function AuthLayout({
   children,
@@ -11,16 +11,15 @@ export default async function AuthLayout({
 }>) {
   const { locale } = await params
   const regionCheck = await checkRegion(locale)
-
-  if (!regionCheck) {
-    return redirect("/")
-  }
+  // Fail open when regions are unavailable to avoid redirect loops.
+  void regionCheck
 
   return (
     <>
       <Header locale={locale} />
       {children}
       <Footer />
+      <VendorBusinessCTA />
     </>
   )
 }

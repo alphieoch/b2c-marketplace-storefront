@@ -1,31 +1,46 @@
 import { Carousel } from "@/components/cells"
 import { CategoryCard } from "@/components/organisms"
 
-export const categories: { id: number; name: string; handle: string }[] = [
+export const categories: {
+  id: number
+  name: string
+  handle: string
+  imageSrc: string
+}[] = [
   {
     id: 1,
-    name: "Sneakers",
-    handle: "sneakers",
+    name: "Produce",
+    handle: "produce",
+    imageSrc:
+      "https://images.unsplash.com/photo-1540420773420-bd3362c9d999?w=400&h=400&fit=crop&q=80",
   },
   {
     id: 2,
-    name: "Sandals",
-    handle: "sandals",
+    name: "Dairy & Eggs",
+    handle: "dairy-eggs",
+    imageSrc:
+      "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400&h=400&fit=crop&q=80",
   },
   {
     id: 3,
-    name: "Boots",
-    handle: "boots",
+    name: "Meat & Poultry",
+    handle: "meat-poultry",
+    imageSrc:
+      "https://images.unsplash.com/photo-1604503468506-a399da69a440?w=400&h=400&fit=crop&q=80",
   },
   {
     id: 4,
-    name: "Sport",
-    handle: "sport",
+    name: "Pantry",
+    handle: "pantry",
+    imageSrc:
+      "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=400&fit=crop&q=80",
   },
   {
     id: 5,
-    name: "Accessories",
-    handle: "accessories",
+    name: "Plants & Seeds",
+    handle: "plants-seeds",
+    imageSrc:
+      "https://images.unsplash.com/photo-1466692476869-aef1dfb1e735?w=400&h=400&fit=crop&q=80",
   },
 ]
 

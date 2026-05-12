@@ -13,14 +13,13 @@ export const HomeProductSection = async ({
   home?: boolean
 }) => {
   return (
-    <section className="py-8 w-full">
-      <h2 className="mb-6 heading-lg font-bold tracking-tight uppercase">
-        {heading}
-      </h2>
+    <section className="w-full">
       <HomeProductsCarousel
         locale={locale}
         sellerProducts={products.slice(0, 4)}
         home={home}
+        title={heading}
+        viewAllHref="/products"
       />
     </section>
   )

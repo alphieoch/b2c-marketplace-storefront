@@ -5,6 +5,12 @@ import { CloseIcon } from "@/icons"
 
 const filtersLabels = {
   category: "Category",
+  specialty: "Specialty",
+  seller: "Seller",
+  region: "Country",
+  city: "City",
+  highlight: "Highlights",
+  fulfillment: "Fulfillment",
   brand: "Brand",
   min_price: "Min Price",
   max_price: "Max Price",

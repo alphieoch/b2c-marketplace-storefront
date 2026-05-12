@@ -4,6 +4,7 @@ import { CartDropdownItem } from './CartDropdownItem/CartDropdownItem';
 import { CategoryNavbar } from './CategoryNavbar/CategoryNavbar';
 import { DeleteCartItemButton } from './DeleteCartItemButton/DeleteCartItemButton';
 import { Dropdown } from './Dropdown/Dropdown';
+import { FarmerNavLinks } from './FarmerNavLinks/FarmerNavLinks';
 import { FilterCheckboxOption } from './FilterCheckboxOption/FilterCheckboxOption';
 import { GalleryCarouselItem } from './GalleryCarouselItem/GalleryCarouselItem';
 import { HeaderCategoryNavbar } from './HeaderCategoryNavbar/HeaderCategoryNavbar';
@@ -34,6 +35,7 @@ import { SellerInfoHeader } from './SellerInfoHeader/SellerInfoHeader';
 import { SellerReview } from './SellerReview/SellerReview';
 import { SellerReviewList } from './SellerReviewList/SellerReviewList';
 import { SellerScore } from './SellerScore/SellerScore';
+import { SellerStoreHours } from './SellerStoreHours/SellerStoreHours';
 import { TabsContent } from './TabsContent/TabsContent';
 import { TabsList } from './TabsList/TabsList';
 import { UserNavigation } from './UserNavigation/UserNavigation';
@@ -59,6 +61,7 @@ export {
   TabsList,
   TabsContent,
   SellerScore,
+  SellerStoreHours,
   SellerReviewList,
   ReportSellerForm,
   ProductPostedDate,
@@ -67,6 +70,7 @@ export {
   HeaderCategoryNavbar,
   DeleteCartItemButton,
   Dropdown,
+  FarmerNavLinks,
   CartDropdownItem,
   LoginForm,
   RegisterForm,

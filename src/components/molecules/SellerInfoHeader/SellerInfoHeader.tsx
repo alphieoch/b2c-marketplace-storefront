@@ -20,20 +20,20 @@ export const SellerInfoHeader = ({
 }) => (
   <div
     className={clsx(
-      "flex gap-4 w-full p-5 items-center",
+      "flex gap-3 w-full p-4 sm:p-5 items-center min-w-0",
       bottomBorder && "border-b"
     )}
   >
-    <div className="rounded-sm">
+    <div className="rounded-sm shrink-0">
       <SellerAvatar photo={photo} size={56} alt={name} />
     </div>
-    <div className="flex flex-col gap-1">
-      <h3 className="heading-sm text-primary">{name}</h3>
-      <div className="flex items-center gap-2">
+    <div className="flex flex-col gap-1 min-w-0 flex-1">
+      <h3 className="heading-sm text-primary truncate">{name}</h3>
+      <div className="flex items-center gap-2 flex-wrap">
         <StarRating starSize={14} rate={rating || 0} />
         <span className="label-md text-secondary">{reviewCount} reviews</span>
       </div>
     </div>
-    {showArrow && <CollapseIcon className="ml-auto -rotate-90" />}
+    {showArrow && <CollapseIcon className="ml-auto shrink-0 -rotate-90" />}
   </div>
 )

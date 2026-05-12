@@ -10,6 +10,7 @@ import { Cart } from "./Cart/Cart"
 import { WishlistPage } from "./WishlistPage/WishlistPage"
 import { ProductDetailsPage } from "./ProductDetailsPage/ProductDetailsPage"
 import { AlgoliaProductsListing } from "./ProductListing/AlgoliaProductsListing"
+import { SearchProductsListing } from "./ProductListing/SearchProductsListing"
 import { OrdersPagination } from "../organisms/OrdersPagination/OrdersPagination"
 
 export {
@@ -25,5 +26,6 @@ export {
   WishlistPage,
   ProductDetailsPage,
   AlgoliaProductsListing,
+  SearchProductsListing,
   OrdersPagination,
 }

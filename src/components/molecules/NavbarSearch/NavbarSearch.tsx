@@ -6,10 +6,20 @@ import { useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { redirect } from "next/navigation"
 import clsx from "clsx"
+import SuggestiveSearch from "@/components/ui/suggestive-search"
 
 interface Props {
   className?: string
 }
+
+const FARM_SUGGESTIONS = [
+  "Search organic tomatoes",
+  "Search fresh milk",
+  "Search farm eggs",
+  "Search artisan cheese",
+  "Search pasture-raised beef",
+  "Search heirloom vegetables",
+]
 
 export const NavbarSearch = ({ className }: Props) => {
   const searchParams = useSearchParams()
@@ -29,18 +39,45 @@ export const NavbarSearch = ({ className }: Props) => {
     handleSearch()
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch()
+    }
+  }
+
   return (
-    <form className={clsx("w-full", className)} method="POST" onSubmit={submitHandler}>
-      <Input
-        icon={<SearchIcon />}
-        onIconClick={handleSearch}
-        iconAriaLabel="Search"
-        placeholder="Search product"
-        value={search}
-        changeValue={setSearch}
-        type="search"
-      />
-      <input type="submit" className="hidden" />
-    </form>
+    <>
+      {/* Desktop */}
+      <form
+        className={clsx("w-full hidden lg:block", className)}
+        method="POST"
+        onSubmit={submitHandler}
+      >
+        <Input
+          icon={<SearchIcon />}
+          onIconClick={handleSearch}
+          iconAriaLabel="Search"
+          placeholder="Search product"
+          value={search}
+          changeValue={setSearch}
+          type="search"
+        />
+        <input type="submit" className="hidden" />
+      </form>
+
+      {/* Mobile */}
+      <div className={clsx("w-full lg:hidden", className)}>
+        <SuggestiveSearch
+          suggestions={FARM_SUGGESTIONS}
+          effect="typewriter"
+          animateMode="infinite"
+          onChange={setSearch}
+          onKeyDown={handleKeyDown}
+          showLeading
+          Leading={() => <SearchIcon size={16} />}
+          className="w-full"
+        />
+      </div>
+    </>
   )
 }

@@ -12,8 +12,10 @@ import { Alert } from '@/components/atoms/Alert/Alert';
 import { LabeledInput } from '@/components/cells';
 import { login, transferCart } from '@/lib/data/customer';
 import { toast } from '@/lib/helpers/toast';
+import posthog from 'posthog-js';
 
 import { LoginFormData, loginFormSchema } from './schema';
+import { WorkOSLoginButton } from '@/components/cells/WorkOSLoginButton';
 
 export const LoginForm = () => {
   const methods = useForm<LoginFormData>({
@@ -44,6 +46,8 @@ const Form = () => {
   const isSessionRequired = searchParams.get('sessionRequired') === 'true';
 
   const submit = async (data: FieldValues) => {
+    setIsAuthError(false);
+
     const formData = new FormData();
     formData.append('email', data.email);
     formData.append('password', data.password);
@@ -51,14 +55,14 @@ const Form = () => {
     const res = await login(formData);
 
     if (res.success) {
-      router.push('/user');
+      posthog.identify(data.email, { email: data.email });
+      posthog.capture('user_logged_in', { email: data.email });
       await transferCart();
+      router.push('/user');
     } else {
+      setIsAuthError(true);
       toast.error({ title: res.message || 'An error occurred. Please try again.' });
     }
-
-    setIsAuthError(false);
-    router.push('/user');
   };
 
   const clearApiError = () => {
@@ -144,6 +148,18 @@ const Form = () => {
               Log in
             </Button>
           </form>
+
+          <div className="mt-6">
+            <div className="relative mb-4">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-neutral-border" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="bg-primary px-2 text-neutral-secondary">or</span>
+              </div>
+            </div>
+            <WorkOSLoginButton />
+          </div>
         </div>
 
         <div className="rounded-sm border p-4">

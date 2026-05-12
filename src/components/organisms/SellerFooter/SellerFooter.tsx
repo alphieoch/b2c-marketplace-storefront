@@ -19,7 +19,7 @@ export const SellerFooter = ({ seller }: { seller: SellerProps }) => {
           </div>
         )} */}
         <Divider square />
-        <p>Joined {format(seller.created_at, "yyyy-MM-dd")}</p>
+        <p>Joined {seller.created_at ? format(new Date(seller.created_at), "yyyy-MM-dd") : "Recently"}</p>
         {/* <Divider square /> */}
         {/* <p>sold {seller.sold}</p> */}
       </div>

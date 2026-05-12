@@ -50,7 +50,7 @@ export async function generateMetadata({
 
   const title = "Home"
   const description =
-    "Welcome to Mercur B2C Demo! Create a modern marketplace that you own and customize in every aspect with high-performance, fully customizable storefront."
+    "Your local farm marketplace. Discover fresh produce, artisan dairy, pasture-raised meats, and more from trusted farmers in your community."
   const ogImage = "/B2C_Storefront_Open_Graph.png"
   const canonical = `${baseUrl}/${locale}`
 
@@ -162,15 +162,14 @@ export default async function Home({
 
       <Hero
         image="/images/hero/Image.jpg"
-        heading="Snag your style in a flash"
-        paragraph="Buy, sell, and discover pre-loved gems from the trendiest brands."
+        heading="Fresh from the farm to your table"
+        paragraph="Discover locally grown produce, pasture-raised meats, artisan dairy, and more from trusted farmers in your community."
         buttons={[
           { label: "Buy now", path: "/categories" },
           {
             label: "Sell now",
             path:
-              process.env.NEXT_PUBLIC_VENDOR_URL ||
-              "https://vendor.mercurjs.com",
+              `${process.env.NEXT_PUBLIC_VENDOR_URL || "https://vendor.mercurjs.com"}/register`,
           },
         ]}
       />

@@ -1,6 +1,5 @@
-import { redirect } from 'next/navigation';
-
 import { Footer, Header } from '@/components/organisms';
+import { VendorBusinessCTA } from '@/components/cells/VendorBusinessCTA';
 import { TalkJsProvider } from '@/components/providers';
 import { retrieveCustomer } from '@/lib/data/customer';
 import { checkRegion } from '@/lib/helpers/check-region';
@@ -18,9 +17,8 @@ export default async function RootLayout({
   const user = await retrieveCustomer();
   const regionCheck = await checkRegion(locale);
 
-  if (!regionCheck) {
-    return redirect('/');
-  }
+  // Fail open when regions are unavailable to avoid redirect loops in production.
+  void regionCheck;
 
   if (!APP_ID || !user || !user.id || !user.email)
     return (
@@ -28,6 +26,7 @@ export default async function RootLayout({
         <Header locale={locale} />
         {children}
         <Footer />
+        <VendorBusinessCTA />
       </>
     );
 
@@ -43,6 +42,7 @@ export default async function RootLayout({
       <Header locale={locale} />
       {children}
       <Footer />
+      <VendorBusinessCTA />
     </TalkJsProvider>
   );
 }

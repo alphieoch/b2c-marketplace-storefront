@@ -201,3 +201,26 @@ export const retrieveReturnReasons = async () => {
     .then(({ return_reasons }) => return_reasons)
     .catch(err => medusaError(err));
 };
+
+export const confirmOrderReceipt = async (
+  orderId: string,
+  payload?: { handover_notes?: string | null }
+) => {
+  const headers = {
+    ...(await getAuthHeaders()),
+    "Content-Type": "application/json",
+  };
+
+  return sdk.client
+    .fetch<{ order: HttpTypes.StoreOrder }>(`/store/orders/${orderId}/confirm-receipt`, {
+      method: "POST",
+      headers,
+      cache: "no-cache",
+      body: {
+        accepted_terms: true,
+        handover_notes: payload?.handover_notes ?? null,
+      },
+    })
+    .then(({ order }) => order)
+    .catch(err => medusaError(err));
+};

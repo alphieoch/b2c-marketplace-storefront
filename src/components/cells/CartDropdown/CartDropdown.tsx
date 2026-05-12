@@ -1,5 +1,8 @@
 "use client"
 
+import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
+
 import { Badge, Button } from "@/components/atoms"
 import { CartDropdownItem, Dropdown } from "@/components/molecules"
 import { usePrevious } from "@/hooks/usePrevious"
@@ -8,12 +11,16 @@ import { CartIcon } from "@/icons"
 import { convertToLocale } from "@/lib/helpers/money"
 import { filterValidCartItems } from "@/lib/helpers/filter-valid-cart-items"
 import { HttpTypes } from "@medusajs/types"
-import { useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
 import { useCartContext } from "@/components/providers"
 
 const getItemCount = (cart: HttpTypes.StoreCart | null) => {
-  return cart?.items?.reduce((acc, item) => acc + item.quantity, 0) || 0
+  return (
+    cart?.items?.reduce(
+      (acc: number, item: HttpTypes.StoreCartLineItem) =>
+        acc + (item.quantity || 0),
+      0
+    ) || 0
+  )
 }
 
 export const CartDropdown = () => {
@@ -24,7 +31,6 @@ export const CartDropdown = () => {
   const cartItemsCount = (cart && getItemCount(cart)) || 0
   const pathname = usePathname()
 
-  // Filter out items with invalid data (missing prices/variants)
   const validItems = filterValidCartItems(cart?.items)
 
   const total = convertToLocale({
@@ -53,7 +59,9 @@ export const CartDropdown = () => {
         setOpen(false)
       }, 2000)
 
-      return () => clearTimeout(timeout)
+      return () => {
+        clearTimeout(timeout)
+      }
     }
   }, [open])
 
@@ -65,25 +73,31 @@ export const CartDropdown = () => {
     ) {
       setOpen(true)
     }
-  }, [cartItemsCount, previousItemCount])
+  }, [cartItemsCount, previousItemCount, pathname])
+
+  const cartTrigger = (
+    <div className="relative text-primary" aria-label="Go to cart">
+      <CartIcon size={20} />
+      {Boolean(cartItemsCount) && (
+        <Badge className="absolute -top-2 -right-2 w-4 h-4 p-0">
+          {cartItemsCount}
+        </Badge>
+      )}
+    </div>
+  )
 
   return (
     <div
-      className="relative"
+      className="relative hidden lg:block"
       onMouseOver={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
       <LocalizedClientLink
         href="/cart"
-        className="relative"
+        className="relative text-primary"
         aria-label="Go to cart"
       >
-        <CartIcon size={20} />
-        {Boolean(cartItemsCount) && (
-          <Badge className="absolute -top-2 -right-2 w-4 h-4 p-0">
-            {cartItemsCount}
-          </Badge>
-        )}
+        {cartTrigger}
       </LocalizedClientLink>
       <Dropdown show={open}>
         <div className="lg:w-[460px] shadow-lg">
@@ -124,7 +138,7 @@ export const CartDropdown = () => {
                   Your shopping cart is empty
                 </h4>
                 <p className="text-lg text-center py-4">
-                  Are you looging for inspiration?
+                  Are you looking for inspiration?
                 </p>
                 <LocalizedClientLink href="/categories">
                   <Button className="w-full py-3">Explore Home Page</Button>

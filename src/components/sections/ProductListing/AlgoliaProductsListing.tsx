@@ -8,7 +8,6 @@ import {
 } from "@/components/organisms"
 import {
   ProductListingLoadingView,
-  ProductListingNoResultsView,
   ProductListingProductsView,
 } from "@/components/molecules"
 import { useSearchParams } from "next/navigation"
@@ -17,6 +16,7 @@ import { PRODUCT_LIMIT } from "@/const"
 import { ProductListingSkeleton } from "@/components/organisms/ProductListingSkeleton/ProductListingSkeleton"
 import { useEffect, useMemo, useState } from "react"
 import { searchProducts } from "@/lib/data/products"
+import { ensureAtLeastOneStoreProduct, DEMO_STORE_PRODUCTS, getDemoFacets } from "@/lib/data/demo-product"
 import { FacetModel } from "@/components/organisms/ProductSidebar/AlgoliaProductSidebar"
 
 export const AlgoliaProductsListing = ({
@@ -123,26 +123,24 @@ const ProductsListing = ({
   return (
     <div className="min-h-[70vh]">
       <div className="flex justify-between w-full items-center">
-        <div className="my-4 label-md">{`${count} listings`}</div>
+        <div className="my-4 label-md">{`${products.length ? count : DEMO_STORE_PRODUCTS.length} listings`}</div>
       </div>
       <div className="hidden md:block">
         <ProductListingActiveFilters />
       </div>
       <div className="md:flex gap-4">
         <div className="w-[280px] flex-shrink-0 hidden md:block">
-          <AlgoliaProductSidebar facets={facets} />
+          <AlgoliaProductSidebar facets={Object.keys(facets).length ? facets : (getDemoFacets() as any)} />
         </div>
         <div className="w-full flex flex-col">
           {isLoading && <ProductListingLoadingView />}
 
-          {!isLoading && !products.length && <ProductListingNoResultsView />}
-
-          {!isLoading && products.length > 0 && (
-            <ProductListingProductsView products={products} />
+          {!isLoading && (
+            <ProductListingProductsView products={ensureAtLeastOneStoreProduct(products)} />
           )}
 
           <div className="mt-auto">
-            <ProductsPagination pages={pages} />
+            <ProductsPagination pages={products.length ? pages : 1} />
           </div>
         </div>
       </div>

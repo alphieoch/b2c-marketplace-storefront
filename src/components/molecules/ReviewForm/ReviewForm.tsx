@@ -9,6 +9,7 @@ import { Button } from '@/components/atoms';
 import { InteractiveStarRating } from '@/components/atoms/InteractiveStarRating/InteractiveStarRating';
 import { createReview, Order } from '@/lib/data/reviews';
 import { cn } from '@/lib/utils';
+import posthog from 'posthog-js';
 
 import { ReviewFormData, reviewSchema } from './schema';
 
@@ -60,6 +61,10 @@ const Form: FC<Props> = ({ handleClose, seller }) => {
       return;
     }
 
+    posthog.capture('seller_review_submitted', {
+      seller_id: seller.seller.id,
+      rating: data.rating,
+    });
     setError('');
     handleClose && handleClose();
   };

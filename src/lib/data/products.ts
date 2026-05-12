@@ -204,7 +204,15 @@ export const searchProducts = async (params: {
   query?: string;
   page?: number;
   hitsPerPage?: number;
-  filters?: string;
+  sort?: 'relevance' | 'title_asc' | 'title_desc' | 'price_asc' | 'price_desc';
+  filters?: {
+    categories?: string[];
+    price_min?: number;
+    price_max?: number;
+    seller_handle?: string;
+    region_codes?: string[];
+    fulfillment_types?: string[];
+  };
   facets?: string[];
   maxValuesPerFacet?: number;
   currency_code?: string;
@@ -251,7 +259,12 @@ export const searchProducts = async (params: {
   let facets = params.facets;
 
   if(!facets) {
-    facets = ["variants.condition", "variants.color", "variants.size"];
+    facets = [
+      "categories.name",
+      "seller.name",
+      "seller.country_code",
+      "seller.fulfillment_types",
+    ];
   }
 
   const { countryCode, ...bodyParams } = params;

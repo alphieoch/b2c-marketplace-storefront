@@ -161,3 +161,47 @@
     --border-warning-secondary: var(--yellow-50);
     --border-disabled: var(--neutral-400);
 }
+
+/* Dark theme — applied when next-themes sets `class="dark"` on <html>. */
+.dark {
+    --bg-primary: var(--neutral-900);
+    --bg-secondary: var(--neutral-800);
+    --bg-tertiary: var(--neutral-0);
+
+    --bg-component-primary: var(--neutral-900);
+    --bg-component-primary-hover: var(--neutral-800);
+    --bg-component-primary-pressed: var(--neutral-700);
+    --bg-component-secondary: var(--neutral-800);
+    --bg-component-secondary-hover: var(--neutral-700);
+    --bg-component-secondary-pressed: var(--neutral-600);
+
+    --bg-action-primary: var(--brand-25);
+    --bg-action-primary-hover: var(--brand-50);
+    --bg-action-primary-pressed: var(--brand-100);
+    --bg-action-secondary: rgba(var(--neutral-0), 0.06);
+    --bg-action-secondary-hover: rgba(var(--neutral-0), 0.12);
+    --bg-action-secondary-pressed: rgba(var(--neutral-0), 0.2);
+    --bg-action-tertiary: rgba(var(--neutral-0), 0.06);
+    --bg-action-tertiary-hover: rgba(var(--neutral-0), 0.12);
+    --bg-action-tertiary-pressed: rgba(var(--neutral-0), 0.2);
+
+    --bg-disabled: var(--neutral-700);
+
+    --content-primary: var(--neutral-0);
+    --content-secondary: var(--neutral-300);
+    --content-tertiary: var(--neutral-1000);
+
+    --content-action-primary: var(--brand-25);
+    --content-action-primary-hover: var(--brand-50);
+    --content-action-primary-pressed: var(--brand-100);
+    --content-action-on-primary: var(--neutral-1000);
+    --content-action-on-secondary: var(--neutral-0);
+    --content-action-on-tertiary: var(--neutral-1000);
+
+    --content-disabled: var(--neutral-500);
+
+    --border-primary: var(--neutral-700);
+    --border-secondary: var(--neutral-100);
+    --border-action: var(--brand-25);
+    --border-disabled: var(--neutral-500);
+}

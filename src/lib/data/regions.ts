@@ -4,7 +4,7 @@ import { HttpTypes } from '@medusajs/types';
 
 import medusaError from '@/lib/helpers/medusa-error';
 
-import { sdk } from '../config';
+import { fetchQuery, sdk } from '../config';
 import { getCacheOptions } from './cookies';
 
 export const listRegions = async () => {
@@ -42,24 +42,53 @@ export const retrieveRegion = async (id: string) => {
 const regionMap = new Map<string, HttpTypes.StoreRegion>();
 
 export const getRegion = async (countryCode: string) => {
+  const mapRegionsByCountry = (regions: HttpTypes.StoreRegion[] = []) => {
+    regions.forEach(region => {
+      region.countries?.forEach(c => {
+        regionMap.set((c?.iso_2 ?? '').toLowerCase(), region);
+      });
+    });
+  };
+
   try {
-    if (regionMap.has(countryCode)) {
-      return regionMap.get(countryCode);
+    const normalizedCountryCode = (countryCode || '').toLowerCase();
+
+    if (regionMap.has(normalizedCountryCode)) {
+      return regionMap.get(normalizedCountryCode);
     }
 
-    const regions = await listRegions();
+    let regions: HttpTypes.StoreRegion[] | null = null;
+    try {
+      regions = await listRegions();
+    } catch {
+      regions = null;
+    }
+
+    // Fallback to direct fetch when cached SDK requests fail in runtime.
+    if (!regions?.length) {
+      const fallback = await fetchQuery('/store/regions', { method: 'GET' });
+      regions = fallback.ok ? fallback.data?.regions ?? [] : [];
+    }
 
     if (!regions) {
       return null;
     }
 
-    regions.forEach(region => {
-      region.countries?.forEach(c => {
-        regionMap.set(c?.iso_2 ?? '', region);
-      });
-    });
+    mapRegionsByCountry(regions);
 
-    const region = countryCode ? regionMap.get(countryCode) : regionMap.get('us');
+    const fallbackCountryCode = (process.env.NEXT_PUBLIC_DEFAULT_REGION || 'us').toLowerCase();
+    const lookupCountryCode = normalizedCountryCode || fallbackCountryCode;
+    let region = regionMap.get(lookupCountryCode);
+
+    // Some SDK responses omit nested countries. If lookup still fails,
+    // force a direct API call and rebuild the map from that payload.
+    if (!region) {
+      const fallback = await fetchQuery('/store/regions', { method: 'GET' });
+      if (fallback.ok) {
+        mapRegionsByCountry(fallback.data?.regions ?? []);
+        region = regionMap.get(lookupCountryCode);
+      }
+    }
 
     return region;
   } catch (e: any) {

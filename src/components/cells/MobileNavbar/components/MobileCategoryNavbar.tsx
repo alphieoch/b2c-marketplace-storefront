@@ -67,14 +67,6 @@ export const MobileCategoryNavbar = ({
         className="flex flex-col gap-2"
         aria-label="Mobile category navigation"
       >
-        <LocalizedClientLink
-          href="/categories"
-          onClick={handleClose}
-          className="label-md uppercase px-4 py-3 text-primary hover:bg-secondary/10 transition-colors"
-        >
-          All Products
-        </LocalizedClientLink>
-
         {filteredCategories.map(({ id, handle, name, category_children }) => {
           const categoryUrl = `/categories/${handle}`
           const isActive = handle === category || handle === parentCategoryHandle

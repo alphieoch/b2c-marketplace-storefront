@@ -25,12 +25,16 @@ export const listCategories = async ({ query }: Partial<CategoriesProps> = {}) =
     })
     .then(({ product_categories }) => product_categories);
 
-  const parentCategories = allCategories.filter(cat => !cat.parent_category_id);
+  // Filter out deactivated/old fashion categories
+  const fashionHandles = new Set(["shirts", "sweatshirts", "pants", "merch", "sneakers", "sandals", "boots", "sport", "accessories"]);
+  const activeCategories = allCategories.filter(cat => !fashionHandles.has(cat.handle));
+
+  const parentCategories = activeCategories.filter(cat => !cat.parent_category_id);
 
   const mainCategories = parentCategories.flatMap(parent => parent.category_children || []);
 
   const mainCategoriesWithChildren = mainCategories.map(mainCat => {
-    const children = allCategories.filter(cat => cat.parent_category_id === mainCat.id);
+    const children = activeCategories.filter(cat => cat.parent_category_id === mainCat.id);
 
     if (children.length > 0) {
       return {
@@ -48,12 +52,18 @@ export const listCategories = async ({ query }: Partial<CategoriesProps> = {}) =
   };
 };
 
+/** Strips accidental file extensions from route params (e.g. pantry.png → pantry). */
+export function normalizeCategoryHandle(handle: string) {
+  return handle.replace(/\.(png|jpe?g|webp|gif|svg)$/i, "")
+}
+
 export const getCategoryByHandle = async (categoryHandle: string) => {
+  const handle = normalizeCategoryHandle(categoryHandle)
   return sdk.client
     .fetch<HttpTypes.StoreProductCategoryListResponse>(`/store/product-categories`, {
       query: {
         fields: '*category_children',
-        handle: categoryHandle
+        handle
       },
       cache: 'force-cache',
       next: { revalidate: 300 }

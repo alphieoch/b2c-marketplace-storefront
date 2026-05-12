@@ -9,6 +9,7 @@ import { HeartFilledIcon, HeartIcon } from '@/icons';
 import { addWishlistItem, removeWishlistItem } from '@/lib/data/wishlist';
 import { toast } from '@/lib/helpers/toast';
 import { Wishlist } from '@/types/wishlist';
+import posthog from 'posthog-js';
 
 export const WishlistButton = ({
   productId,
@@ -39,6 +40,7 @@ export const WishlistButton = ({
         reference_id: productId,
         reference: 'product'
       });
+      posthog.capture('wishlist_item_added', { product_id: productId });
     } catch (error) {
       toast.error({
         title: 'Failed to add item to wishlist',
@@ -56,6 +58,7 @@ export const WishlistButton = ({
       await removeWishlistItem({
         product_id: productId
       });
+      posthog.capture('wishlist_item_removed', { product_id: productId });
     } catch (error) {
       toast.error({
         title: 'Failed to add item to wishlist',

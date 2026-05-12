@@ -42,24 +42,20 @@ async function getRegionMap(cacheId: string) {
 
   if (!regionMap.keys().next().value || regionMapUpdated < Date.now() - 3600 * 1000) {
     // Fetch regions from Medusa. We can't use the JS client here because middleware is running on Edge and the client needs a Node environment.
-    const { regions } = await fetch(`${BACKEND_URL}/store/regions`, {
+    // Note: next.revalidate/tags and cache:'force-cache' are not supported in Edge middleware — rely on the in-memory cache above.
+    const response = await fetch(`${BACKEND_URL}/store/regions`, {
       headers: {
         'x-publishable-api-key': PUBLISHABLE_API_KEY!
-      },
-      next: {
-        revalidate: 3600,
-        tags: [`regions-${cacheId}`]
-      },
-      cache: 'force-cache'
-    }).then(async response => {
-      const json = await response.json();
-
-      if (!response.ok) {
-        throw new Error(json.message);
       }
-
-      return json;
     });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+      throw new Error(json.message);
+    }
+
+    const { regions } = json;
 
     if (!regions?.length) {
       throw new Error('No regions found. Please set up regions in your Medusa Admin.');
@@ -91,8 +87,6 @@ async function getCountryCode(
 
     if (urlCountryCode && regionMap.has(urlCountryCode)) {
       countryCode = urlCountryCode;
-    } else if (vercelCountryCode && regionMap.has(vercelCountryCode)) {
-      countryCode = vercelCountryCode;
     } else if (regionMap.has(DEFAULT_REGION)) {
       countryCode = DEFAULT_REGION;
     } else if (regionMap.keys().next().value) {
@@ -157,7 +151,15 @@ export async function middleware(request: NextRequest) {
     });
   }
 
-  const regionMap = await getRegionMap(cacheId);
+  let regionMap: Map<string, HttpTypes.StoreRegion>;
+  try {
+    regionMap = await getRegionMap(cacheId);
+  } catch (err) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error('middleware.ts: getRegionMap failed —', err);
+    }
+    return response;
+  }
   const countryCode = regionMap && (await getCountryCode(request, regionMap));
   const urlHasCountryCode = countryCode && pathname.split('/')[1].includes(countryCode);
 
