@@ -205,18 +205,20 @@ export const SlideEffect: React.FC<EffectRendererProps> = ({
     }
   }, [isActive])
 
+  useEffect(() => {
+    if (!isActive || !prefersReducedMotion) return
+    if (!allowDelete) return
+    const t = window.setTimeout(
+      () => onDeleteComplete?.(),
+      Math.max(200, pauseAfterTypeMs)
+    )
+    timers.current.push(t)
+    return () => timers.current.forEach(clearTimeout)
+  }, [isActive, prefersReducedMotion, onDeleteComplete, pauseAfterTypeMs, allowDelete])
+
   if (!isActive) return null
 
   if (prefersReducedMotion) {
-    useEffect(() => {
-      if (!allowDelete) return
-      const t = window.setTimeout(
-        () => onDeleteComplete?.(),
-        Math.max(200, pauseAfterTypeMs)
-      )
-      timers.current.push(t)
-      return () => timers.current.forEach(clearTimeout)
-    }, [onDeleteComplete, pauseAfterTypeMs, allowDelete])
     return (
       <span className="text-sm text-secondary select-none">{text}</span>
     )
@@ -299,18 +301,20 @@ export const FadeEffect: React.FC<EffectRendererProps> = ({
     }
   }, [isActive])
 
+  useEffect(() => {
+    if (!isActive || !prefersReducedMotion) return
+    if (!allowDelete) return
+    const t = window.setTimeout(
+      () => onDeleteComplete?.(),
+      Math.max(200, pauseAfterTypeMs)
+    )
+    timers.current.push(t)
+    return () => timers.current.forEach(clearTimeout)
+  }, [isActive, prefersReducedMotion, onDeleteComplete, pauseAfterTypeMs, allowDelete])
+
   if (!isActive) return null
 
   if (prefersReducedMotion) {
-    useEffect(() => {
-      if (!allowDelete) return
-      const t = window.setTimeout(
-        () => onDeleteComplete?.(),
-        Math.max(200, pauseAfterTypeMs)
-      )
-      timers.current.push(t)
-      return () => timers.current.forEach(clearTimeout)
-    }, [onDeleteComplete, pauseAfterTypeMs, allowDelete])
     return (
       <span className="text-sm text-secondary select-none">{text}</span>
     )
