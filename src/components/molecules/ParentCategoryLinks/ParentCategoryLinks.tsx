@@ -39,7 +39,7 @@ export const ParentCategoryLinks = ({
 
   return (
     <nav
-      className="hidden lg:flex flex-1 w-full min-w-0 max-w-full flex-nowrap items-center gap-2 xl:gap-4 overflow-x-auto overflow-y-visible scrollbar-hide pr-3"
+      className="hidden lg:flex flex-1 w-full min-w-0 max-w-full flex-wrap items-center gap-2 xl:gap-4 pr-3"
       aria-label="Parent categories"
     >
       {storefrontParentCategories.map(({ id, handle, name }) => {
@@ -50,7 +50,7 @@ export const ParentCategoryLinks = ({
             key={id}
             href={`/categories/${handle}`}
             className={cn(
-              "label-large uppercase text-primary hover:opacity-80 transition-opacity pb-2 font-semibold whitespace-nowrap shrink-0",
+              "label-large uppercase text-primary hover:opacity-80 transition-opacity pb-2 font-semibold shrink-0",
               isActive && "border-b border-primary"
             )}
           >

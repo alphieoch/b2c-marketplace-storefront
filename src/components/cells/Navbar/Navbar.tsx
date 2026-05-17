@@ -25,7 +25,7 @@ export const Navbar = ({ categories, parentCategories }: NavbarProps) => {
       {/* Desktop navigation */}
       <div className="hidden lg:flex items-center w-full gap-6 relative">
         {/* Left: Parent categories */}
-        <div className="flex items-center gap-2 xl:gap-4 overflow-x-auto scrollbar-hide flex-1 min-w-0 justify-start">
+        <div className="flex items-center gap-2 xl:gap-4 flex-1 min-w-0 justify-start">
           <ParentCategoryLinks parentCategories={parentCategories} categories={categories} />
         </div>
 
@@ -58,7 +58,7 @@ export const Navbar = ({ categories, parentCategories }: NavbarProps) => {
         </div>
 
         {/* Right: Farmer links */}
-        <div className="flex items-center gap-2 xl:gap-4 overflow-x-auto scrollbar-hide flex-1 min-w-0 justify-end">
+        <div className="flex items-center gap-2 xl:gap-4 flex-1 min-w-0 justify-end">
           <FarmerNavLinks items={farmerNav} align="end" />
         </div>
       </div>

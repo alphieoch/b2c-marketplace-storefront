@@ -94,7 +94,7 @@ const CountrySelect = ({ regions }: CountrySelectProps) => {
         >
           <ListboxButton className="relative w-16 flex justify-between items-center h-10 bg-component-secondary text-left  cursor-default focus:outline-none border rounded-lg focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-gray-300 focus-visible:ring-offset-2 focus-visible:border-gray-300 text-base-regular">
             <div className="txt-compact-small flex items-start mx-auto">
-              {current && (
+              {current ? (
                 <span className="txt-compact-small flex items-center gap-x-2">
                   {/* @ts-ignore */}
                   <ReactCountryFlag
@@ -107,6 +107,20 @@ const CountrySelect = ({ regions }: CountrySelectProps) => {
                     countryCode={current.country ?? ""}
                   />
                   {current.country?.toUpperCase()}
+                </span>
+              ) : (
+                <span className="txt-compact-small flex items-center gap-x-2">
+                  {/* @ts-ignore */}
+                  <ReactCountryFlag
+                    alt={`${(countryCode as string)?.toUpperCase() ?? ""} flag`}
+                    svg
+                    style={{
+                      width: "16px",
+                      height: "16px",
+                    }}
+                    countryCode={(countryCode as string) ?? ""}
+                  />
+                  {(countryCode as string)?.toUpperCase() ?? "--"}
                 </span>
               )}
             </div>
