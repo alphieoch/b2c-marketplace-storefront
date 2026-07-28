@@ -1,3 +1,5 @@
+  > ⚠️  **Deprecated** — this repository is no longer maintained. The B2C storefront is now part of the [Mercur](https://github.com/mercurjs/mercur) monorepo. Use [mercurjs/mercur](https://github.com/mercurjs/mercur) instead.
+
 ![B2C Storefront Cover](https://cdn.prod.website-files.com/6790aeffc4b432ccaf1b56e5/67a21bd27b4ac8b812c1d84f_B2C%20Storefront%20Cover.png)
 
 <div align="center">
